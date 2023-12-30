@@ -7,10 +7,7 @@ function NavBar({ handleToNav, toAdd }) {
 
     } else {
         console.log("add to cart");
-
     }
-
-
     return (
         <>
             <nav style={{ position: "sticky", top: "0", zIndex: "9000" }} className="navbar navbar-expand-lg navbar navbar-dark bg-dark">

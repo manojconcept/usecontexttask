@@ -5,31 +5,32 @@ import NavBar from "./NavBar";
 
 function Products() {
     const data = useContext(dataSet);
-    const [toAdd, setToAdd] = useState([]);
+    const [cart, setCart] = useState([]);
 
-    let inCount = 1
     const handleToAdd = (data) => {
-        const dataExtract = data
-        console.log("stock", data.stock)
-        const existingItem = toAdd.find((el) => el.id === data.id)
+        const dataExtract = data;
+        const existingItem = cart.find((el) => el.id === data.id);
+        console.log("existingItem",existingItem)
+
         if (existingItem) {
-            setToAdd((preData) => preData.map(
+            setCart((preData) => preData.map(
                 (item) => item.id === existingItem.id ? { ...item, count: item.count++ } : item
             ))
         } else {
-            setToAdd((preData) => [...preData,{...dataExtract,count: inCount++}]);
+            setCart((preData) => [...preData,{...dataExtract,count: 1}]);
         }
-        console.log(toAdd);
+        console.log(cart);
+
     }
 
     const handleToNav = () => {
-        console.log(toAdd)
+        console.log(cart)
     }
 
-    console.log("toAdd", toAdd);
+    console.log("toAdd", cart);
     return (
         <>
-            <NavBar handleToNav={() => { handleToNav(toAdd) }} toAdd={toAdd} />
+            <NavBar handleToNav={() => { handleToNav(cart) }} toAdd={cart} />
             <section className="py-5">
                 <div className="container px-4 px-lg-5 mt-5">
                     <div className="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-3 justify-content-center">
