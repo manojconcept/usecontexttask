@@ -1,14 +1,9 @@
 import Rating from '@mui/material/Rating';
-import { useNavigate} from "react-router-dom"
-
-
-
-
-
-export function ProductListCards({ data, index }) {
+// import { useNavigate} from "react-router-dom"
+export function ProductListCards({ data, index,handleToAdd }) {
     const percentageAmout = (100 * data.discountPercentage) / data.price;
     const dataPriceA = data.price-percentageAmout;
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     return (
         <div key={index} className="col mb-5">
             <div className="card h-100">
@@ -25,11 +20,7 @@ export function ProductListCards({ data, index }) {
                     </div>
                 </div>
                 <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                    <div className="text-center"><button className="btn btn-outline-dark mt-auto" onClick={()=>{
-                        return(
-                            navigate(`add/${index}`)
-                        )
-                    }}>
+                    <div className="text-center"><button className="btn btn-outline-dark mt-auto" onClick={handleToAdd}>
                         Add to cart
                     </button></div>
                 </div>

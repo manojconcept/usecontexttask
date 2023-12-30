@@ -3,9 +3,9 @@ import { dataSet } from "./Main";
 import { useContext } from "react";
 
 function CheckOut() {
-    const { productid } = useParams();
     const data = useContext(dataSet)
-    const dataDetail = data.products[productid];
+    const { productid } = useParams();
+    const dataDetail = data[productid]
     console.log(dataDetail)
     return (
         <>

@@ -4,11 +4,12 @@ import { DATA } from "../config/Config";
 import Products from "./Products";
 import CheckOut from "./CheckOut";
 
-export const dataSet = createContext(); //create
+export const dataSet = createContext(); 
 
 function Main() {
+    const realData = DATA.products;
     return (
-        <dataSet.Provider value={DATA}> {/*PUblisher*/}
+        <dataSet.Provider value={realData}>
             <Routes>
                 <Route path="/" element={<Products />} /> 
                 <Route path="/add/:productid" element={<CheckOut/>}/>

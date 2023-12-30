@@ -1,26 +1,47 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { dataSet } from "./Main";
 import { ProductListCards } from "./ProductListCards";
+import NavBar from "./NavBar";
 
 function Products() {
-    
     const data = useContext(dataSet);
-    const dataMin = data.products;
-    console.log(dataMin);
-    const dataSp = [...dataMin]
-    console.log(dataSp);
+    const [toAdd, setToAdd] = useState([]);
 
+    let inCount = 1
+    const handleToAdd = (data) => {
+        const dataExtract = data
+        console.log("stock", data.stock)
+        const extistingItem = toAdd.find((el) => el.id === data.id)
+        if (extistingItem) {
+            setToAdd((preData)=>preData.map(
+                (item)=>item.id === extistingItem.id ? {...item,count:inCount++} : item
+                ))
+        } else {
+            const dataUpdate = {
+                ...dataExtract,
+                count: inCount++
+            }
+            setToAdd((preData) => [...preData, dataUpdate]);
+
+
+        }
+        console.log(toAdd);
+    }
+    
+    console.log(toAdd);
     return (
-        <section className="py-5">
-            <div className="container px-4 px-lg-5 mt-5">
-                <div className="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-3 justify-content-center">
-                    {dataSp.map((data, index) => {
-                        return <ProductListCards index={index} data={data} />
-                    })}
+        <>
+            <NavBar />
+            <section className="py-5">
+                <div className="container px-4 px-lg-5 mt-5">
+                    <div className="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-3 justify-content-center">
+                        {data.map((data, index) => {
+                            return <ProductListCards handleToAdd={() => { handleToAdd(data) }} key={index} index={index} data={data} />
+                        })}
+                    </div>
                 </div>
-            </div>
-        </section>
-
+            </section>
+        </>
     );
 }
 
