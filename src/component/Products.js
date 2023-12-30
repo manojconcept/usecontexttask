@@ -11,27 +11,25 @@ function Products() {
     const handleToAdd = (data) => {
         const dataExtract = data
         console.log("stock", data.stock)
-        const extistingItem = toAdd.find((el) => el.id === data.id)
-        if (extistingItem) {
-            setToAdd((preData)=>preData.map(
-                (item)=>item.id === extistingItem.id ? {...item,count:inCount++} : item
-                ))
+        const existingItem = toAdd.find((el) => el.id === data.id)
+        if (existingItem) {
+            setToAdd((preData) => preData.map(
+                (item) => item.id === existingItem.id ? { ...item, count: item.count++ } : item
+            ))
         } else {
-            const dataUpdate = {
-                ...dataExtract,
-                count: inCount++
-            }
-            setToAdd((preData) => [...preData, dataUpdate]);
-
-
+            setToAdd((preData) => [...preData,{...dataExtract,count: inCount++}]);
         }
         console.log(toAdd);
     }
-    
-    console.log(toAdd);
+
+    const handleToNav = () => {
+        console.log(toAdd)
+    }
+
+    console.log("toAdd", toAdd);
     return (
         <>
-            <NavBar />
+            <NavBar handleToNav={() => { handleToNav(toAdd) }} toAdd={toAdd} />
             <section className="py-5">
                 <div className="container px-4 px-lg-5 mt-5">
                     <div className="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-3 justify-content-center">

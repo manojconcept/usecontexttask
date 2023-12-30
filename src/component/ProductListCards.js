@@ -1,8 +1,8 @@
 import Rating from '@mui/material/Rating';
 // import { useNavigate} from "react-router-dom"
-export function ProductListCards({ data, index,handleToAdd }) {
+export function ProductListCards({ data, index, handleToAdd }) {
     const percentageAmout = (100 * data.discountPercentage) / data.price;
-    const dataPriceA = data.price-percentageAmout;
+    const dataPriceA = data.price - percentageAmout;
     // const navigate = useNavigate();
     return (
         <div key={index} className="col mb-5">
