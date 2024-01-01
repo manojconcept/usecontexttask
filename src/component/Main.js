@@ -1,21 +1,48 @@
 import { createContext } from "react";
 import { Routes, Route } from "react-router-dom";
-import { DATA } from "../config/Config";
+import { DATA } from "../config/DB";
+import { useState } from "react";
 import Products from "./Products";
-import CheckOut from "./CheckOut";
+import DetailProduct from "./DetailProduct";
+import Checkout from "./Checkout";
+import NavBar from "./NavBar";
+import {useNavigate} from "react-router-dom";
 
-export const dataSet = createContext(); 
+export const dataSet = createContext();
 
 function Main() {
     const realData = DATA.products;
+    const [cart, setCart] = useState([]);
+    const naviGate = useNavigate();
+    
+    const handleAddProducts = (data,cart,setCart) => {
+        const dataExtract = data;
+        const existingItem = cart.find((el) => el.id === data.id); 
+        console.log("existingItem",existingItem);
+        if (existingItem) {
+            setCart((preData) => preData.map(
+                (item) => item.id === existingItem.id ? { ...item, count: item.count++ } : item
+            ))
+        } else {
+            setCart((preData) => [...preData,{...dataExtract,count: 1}]);
+        }
+        console.log(cart);
+    }
+
+    const handleToNav = (data) =>{
+        console.log(data)
+        naviGate("/checkout")
+    }
     return (
-        <dataSet.Provider value={realData}>
+        <dataSet.Provider value={{ realData, cart, setCart,handleAddProducts}}>
+            <NavBar handleToNav={() => { handleToNav(cart) }} toAdd={cart} />
             <Routes>
-                <Route path="/" element={<Products />} /> 
-                <Route path="/add/:productid" element={<CheckOut/>}/>
+                <Route path="/" element={<Products />} />
+                <Route path="/add/:productid" element={<DetailProduct />} />
+                <Route path="/checkout" element={<Checkout />} />
             </Routes>
         </dataSet.Provider>
     );
-}
+}   
 
 export default Main;

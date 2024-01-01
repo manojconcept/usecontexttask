@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 function NavBar({ handleToNav, toAdd }) {
     let totalCount = 0
     if (toAdd.length !== 0) {
@@ -18,7 +18,7 @@ function NavBar({ handleToNav, toAdd }) {
                     <div className="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul style={{ display: "flex" }} className="navbar-nav">
                             <li className="nav-item active">
-                                <button type="button" className="nav-link" href="#">Home</button>
+                               <Link to={"/"}><button type="button" className="nav-link" href="#">Home</button></Link>
                             </li>
                             <li className="nav-item active">
                                 <button onClick={handleToNav} type="button" className="nav-link" href="#">Check out<span className="badge badge-light">{totalCount

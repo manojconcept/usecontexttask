@@ -1,0 +1,62 @@
+import { useContext } from "react";
+import { dataSet } from "./Main";
+import CheckoutCard from "./CheckoutCard";
+
+function Checkout() {
+    const main = useContext(dataSet);
+    console.log(main);
+    console.log(main.cart)
+    const cart = main.cart;
+    const setCart = main.setCart;
+    const productsData = main.cart;
+    return (
+        <div className="container" style={{ display: "flex", justifyContent: "space-evenly" }}>
+            <div style={{ width: "100%" }}>
+                {
+                    productsData.map((data, index) => {
+                        return (
+                            <div className="container">
+                                <CheckoutCard key={index} value={data} index={index} cart={cart} setCart={setCart} />
+                            </div>
+                        );
+                    })
+                }
+
+            </div>
+            <div >
+                <div className="card mt-4" style={{ width: "18rem", position: "sticky", top: "90px" }}>
+                    <div className="card-body">
+                        <h5 style={{textAlign:"center"}} className="card-title">Total</h5>
+                        <hr/>
+                        {/* <h6 className="card-subtitle mb-2 text-muted"></h6> */}
+
+                        {
+                            cart.map((data, index) => {
+                                return (
+                                    <>
+                                        <p className="card-text">{`${data.title} x ${data.count} =   $ ${data.price * data.count}`}</p>
+                                    </>
+
+                                )
+                            })
+                        }
+                        <hr/>
+                        <div style={{display:"flex",justifyContent:"space-around"}}>
+                            <div> <p className="card-text">Total</p></div>
+                            <div> <p className="card-text">${
+                                cart.reduce((accum,current)=>accum + (current.count * current.price),0)
+                            }</p></div>
+                        </div>
+                       
+
+                        {/* <a href="#" className="card-link">Card link</a>
+                        <a href="#" className="card-link">Another link</a> */}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    )
+}
+
+export default Checkout;

@@ -1,41 +1,27 @@
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { dataSet } from "./Main";
 import { ProductListCards } from "./ProductListCards";
-import NavBar from "./NavBar";
+import { useNavigate } from "react-router-dom"
 
 function Products() {
-    const data = useContext(dataSet);
-    const [cart, setCart] = useState([]);
+    const toSinglePage = useNavigate();
+    const main = useContext(dataSet);
+    console.log(main.cart)
+    const mainProducts = main.realData;
 
-    const handleToAdd = (data) => {
-        const dataExtract = data;
-        const existingItem = cart.find((el) => el.id === data.id);
-        console.log("existingItem",existingItem)
-
-        if (existingItem) {
-            setCart((preData) => preData.map(
-                (item) => item.id === existingItem.id ? { ...item, count: item.count++ } : item
-            ))
-        } else {
-            setCart((preData) => [...preData,{...dataExtract,count: 1}]);
-        }
-        console.log(cart);
-
+    const handleSingleProduct = (data) => {
+        console.log(data.id)
+        toSinglePage(`add/${data.id}`)
     }
 
-    const handleToNav = () => {
-        console.log(cart)
-    }
-
-    console.log("toAdd", cart);
+    console.log("toAdd", main.cart);
     return (
         <>
-            <NavBar handleToNav={() => { handleToNav(cart) }} toAdd={cart} />
             <section className="py-5">
                 <div className="container px-4 px-lg-5 mt-5">
                     <div className="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-3 justify-content-center">
-                        {data.map((data, index) => {
-                            return <ProductListCards handleToAdd={() => { handleToAdd(data) }} key={index} index={index} data={data} />
+                        {mainProducts.map((data, index) => {
+                            return <ProductListCards handleSingleProduct={() => { handleSingleProduct(data) }} handleToAdd={() => { main.handleAddProducts(data, main.cart, main.setCart) }} key={index} index={index} data={data} />
                         })}
                     </div>
                 </div>

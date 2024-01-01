@@ -2,10 +2,12 @@ import { useParams } from "react-router-dom";
 import { dataSet } from "./Main";
 import { useContext } from "react";
 
-function CheckOut() {
-    const data = useContext(dataSet)
+function DetailProduct() {
+    const main = useContext(dataSet)
+    const products = main.realData
     const { productid } = useParams();
-    const dataDetail = data[productid]
+
+    const dataDetail = products[productid - 1]
     console.log(dataDetail)
     return (
         <>
@@ -22,4 +24,4 @@ function CheckOut() {
     );
 }
 
-export default CheckOut;
+export default DetailProduct;
