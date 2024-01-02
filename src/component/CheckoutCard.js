@@ -7,7 +7,7 @@ function CheckoutCard({ value, index, cart, setCart }) {
 
     let stock = [];
     for (let i = 1; i <= value.stock; i++) {
-        stock.push(i); 
+        stock.push(i);
     }
     console.log(stock);
 
@@ -17,9 +17,9 @@ function CheckoutCard({ value, index, cart, setCart }) {
         console.log(value);
         console.log(`cart : ${cart}`);
         console.log(cart);
-        setCart((preData) => preData.map((product)=>{
-            if(product.id === value.id){
-                return {...product,count:parseInt(valueDisplay)};
+        setCart((preData) => preData.map((product) => {
+            if (product.id === value.id) {
+                return { ...product, count: parseInt(valueDisplay) };
             }
             return product
         })
@@ -29,28 +29,30 @@ function CheckoutCard({ value, index, cart, setCart }) {
 
     return (
         <div key={index} className="card w-75 m-4">
-            <div className="card-body">
-                <div className="badge bg-dark text-white position-absolute" style={{ top: "0.5rem", right: "0.5rem" }}>{value.brand}</div>
-                <div className="badge bg-light text-dark position-absolute" style={{ top: "0.5rem", right: "5rem" }}>{` category : ${value.category}`}</div>
-                <div><h5 className="card-title">{value.title}</h5></div>
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <div>
-                        <p className="card-text">{value.description}</p>
-                    </div>
-                    <div>
-                        <label htmlFor={`quantityDropdown-${index}`}>Quantity:</label>
-                        <select id={`quantityDropdown-${index}`} value={value.count} onChange={handleCal}>
-                            {stock.map((data, index) => (
-                                <Option key={index} data={data} />
-                            ))}
-                        </select>
-                    </div>
-                    <div>
-                        {`$ ${value.price}`}
+            <div className="card-body d-flex align-items-center">
+                <img src={value.thumbnail} alt={value.title} className="img-fluid rounded mr-3" style={{ width: "100px", height: "auto" }} />
+                <div style={{marginLeft:"10px"}}>
+                    <div className="badge bg-dark text-white position-absolute" style={{ top: "0.5rem", right: "0.5rem" }}>{value.brand}</div>
+                    <div className="badge bg-light text-dark position-absolute" style={{ top: "0.5rem", right: "5rem" }}>{` category : ${value.category}`}</div>
+                    <h5 className="card-title">{value.title}</h5>
+                    <p className="card-text">{value.description}</p>
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                        <div>
+                            <label htmlFor={`quantityDropdown-${index}`}>Quantity:</label>
+                            <select id={`quantityDropdown-${index}`} value={value.count} onChange={handleCal}>
+                                {stock.map((data, index) => (
+                                    <Option key={index} data={data} />
+                                ))}
+                            </select>
+                        </div>
+                        <div>
+                            {`₹ ${value.price}`}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     );
 }
 

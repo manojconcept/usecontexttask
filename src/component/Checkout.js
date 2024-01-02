@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { dataSet } from "./Main";
 import CheckoutCard from "./CheckoutCard";
+import {dataSet} from "./Main"
 
 function Checkout() {
     const main = useContext(dataSet);
@@ -34,7 +34,7 @@ function Checkout() {
                             cart.map((data, index) => {
                                 return (
                                     <>
-                                        <p className="card-text">{`${data.title} x ${data.count} =   $ ${data.price * data.count}`}</p>
+                                        <p className="card-text">{`${data.title} x ${data.count} =   ₹ ${data.price * data.count}`}</p>
                                     </>
 
                                 )
@@ -43,18 +43,14 @@ function Checkout() {
                         <hr/>
                         <div style={{display:"flex",justifyContent:"space-around"}}>
                             <div> <p className="card-text">Total</p></div>
-                            <div> <p className="card-text">${
+                            <div><p>:</p></div>
+                            <div> <p className="card-text">₹{
                                 cart.reduce((accum,current)=>accum + (current.count * current.price),0)
                             }</p></div>
                         </div>
-                       
-
-                        {/* <a href="#" className="card-link">Card link</a>
-                        <a href="#" className="card-link">Another link</a> */}
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }

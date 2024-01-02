@@ -15,11 +15,12 @@ export function ProductListCards({ data, index, handleToAdd,handleSingleProduct 
                 <div className="card-body p-4">
                     <div className="text-center">
                         <h5 className="fw-bolder">{data.name}</h5>
+                        <h5 className="fw-bolder">{data.title}</h5>
                         <Rating name="read-only" value={data.rating} readOnly />
                         <div>
                             <p>{data.description}</p>
                         </div>
-                        <span className="text-muted">$<s>{data.price}</s>{` Offer : $${dataPriceA.toFixed(2)}`}</span>
+                        <span className="text-muted">₹<s>{data.price}</s>{` Offer : ₹${dataPriceA.toFixed(2)}`}</span>
                     </div>
                 </div>
                 </button>
