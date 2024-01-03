@@ -1,16 +1,17 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function CheckoutCard({ value, index, cart, setCart }) {
     console.log(value.id);
     console.log(value);
     console.log(value.stock);
+    const navigate = useNavigate();
 
     let stock = [];
     for (let i = 1; i <= value.stock; i++) {
         stock.push(i);
     }
     console.log(stock);
-
     const handleCal = (e) => {
         const valueDisplay = e.target.value;
         console.log(valueDisplay);
@@ -25,12 +26,18 @@ function CheckoutCard({ value, index, cart, setCart }) {
         })
         )
     };
+    const handleToSp = () => {
+        navigate(`/add/${value.id}`)
+    }
     console.log(cart);
 
     return (
         <div key={index} className="card w-75 m-4">
             <div className="card-body d-flex align-items-center">
+                <button style={{border:"none",background:"none"}} onClick={handleToSp}>
                 <img src={value.thumbnail} alt={value.title} className="img-fluid rounded mr-3" style={{ width: "100px", height: "auto" }} />
+                </button>
+
                 <div style={{marginLeft:"10px"}}>
                     <div className="badge bg-dark text-white position-absolute" style={{ top: "0.5rem", right: "0.5rem" }}>{value.brand}</div>
                     <div className="badge bg-light text-dark position-absolute" style={{ top: "0.5rem", right: "5rem" }}>{` category : ${value.category}`}</div>

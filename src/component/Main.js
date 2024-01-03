@@ -15,7 +15,7 @@ function Main() {
     const [cart, setCart] = useState([]);
     const naviGate = useNavigate();
     
-    const handleAddProducts = (data,cart,setCart) => {
+    const handleAddProducts = (data) => {
         const dataExtract = data;
         const existingItem = cart.find((el) => el.id === data.id); 
         console.log("existingItem",existingItem);
@@ -31,7 +31,7 @@ function Main() {
 
     const handleToNav = (data) =>{
         console.log(data)
-        naviGate("/checkout")
+        data.length !==0 ?  naviGate("/checkout") : console.log("add Product")
     }
     return (
         <dataSet.Provider value={{ realData, cart, setCart,handleAddProducts}}>
@@ -43,6 +43,6 @@ function Main() {
             </Routes>
         </dataSet.Provider>
     );
-}   
+}
 
 export default Main;

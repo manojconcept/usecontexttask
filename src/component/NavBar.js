@@ -17,11 +17,12 @@ function NavBar({ handleToNav, toAdd }) {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul style={{ display: "flex" }} className="navbar-nav">
-                            <li className="nav-item active">
-                               <Link to={"/"}><button type="button" className="nav-link" href="#">Home</button></Link>
+                            <li className="nav-item ">
+                               <Link className="nav-link" to={"/"}>Home</Link>
                             </li>
-                            <li className="nav-item active">
-                                <button onClick={handleToNav} type="button" className="nav-link" href="#">Check out<span className="badge badge-light">{totalCount
+                            
+                            <li className="nav-item ">
+                                <button onClick={handleToNav} type="button" className="nav-link" href="#"><i class="bi bi-basket"></i><span className="badge badge-light">{totalCount
                                 }</span></button>
                             </li>
                         </ul>

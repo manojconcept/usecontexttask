@@ -76,7 +76,7 @@ function DetailProduct() {
                                 </select>
                             </div>
                             <div style={{ marginLeft: "2%" }}>
-                                <p>{existingData!==undefined? `Total : ${existingData.count*existingData.price}`: `Total : ${0}` }</p>
+                                <p>{existingData!==undefined? `Total : ${existingData.count} X ${existingData.count*existingData.price}`: `Total : ${0}` }</p>
                                 <button onClick={handleGoCo}>Check out</button>
                             </div>
                         </div>
